@@ -15,13 +15,11 @@ describe('app routes', () => {
   });
 
   afterAll(() => {
-    console.log('closing');
     return mongoose.connection.close();
   });
 
   describe('Hello world route', () => {
     it('Returns hello world', () => {
-      console.log('starting');
       return request(app)
         .get('/api/v1/hello-world')
         .then(res => {
