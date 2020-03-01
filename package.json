@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "jest --verbose --runInBand",
-    "test:watch": "npm run test -- --watch",
+    "test:watch": "npm run test -- --watchAll",
     "start": "node --inspect=5858 -r ts-node/register ./server.ts",
     "start:watch": "nodemon",
     "build": "tsc"

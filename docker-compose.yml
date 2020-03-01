@@ -1,0 +1,25 @@
+version: '2.2'
+
+services:
+  backend:
+    restart: always
+    container_name: community-pool-api
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: npm run start:watch
+    working_dir: /app
+    ports:
+      - '7890:7890'
+    env_file:
+      - ./.env
+    volumes:
+      - /app/node_modules
+      - .:/app
+    links:
+      - mongo
+  mongo:
+    container_name: community-pool-db
+    image: mongo
+    ports:
+      - '27027:27027'
