@@ -1,6 +1,12 @@
-const mongoose = require('mongoose');
+import * as mongoose from 'mongoose';
+import { Schema, Document } from 'mongoose';
 
-const countSchema = new mongoose.Schema(
+export interface ICount extends Document {
+  routeName: string;
+  count: number;
+}
+
+const countSchema: Schema = new Schema(
   {
     routeName: {
       type: String,
@@ -21,4 +27,4 @@ const countSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Channel', countSchema);
+export default mongoose.model<ICount>('Count', countSchema);
