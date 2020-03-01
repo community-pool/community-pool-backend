@@ -23,7 +23,7 @@ describe('app routes', () => {
       return request(app)
         .get('/api/v1/hello-world')
         .then(res => {
-          expect(res.text).toEqual('Hello World!');
+          expect(res.body).toEqual({ count: 1, message: 'Hello World!' });
         });
     });
   });
