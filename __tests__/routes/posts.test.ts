@@ -34,6 +34,18 @@ describe('app routes', () => {
         });
     });
 
+    it('Returns a new posts', () => {
+      return request(app)
+        .post('/api/v1/posts')
+        .send({ userName: 'jack', content: 'testConent' })
+        .then(res => {
+          expect(res.body).toEqual({
+            status: 400,
+            message: 'Post validation failed: title: Path `title` is required.'
+          });
+        });
+    });
+
     it('Returns a list of posts', async () => {
       const posts = await createPosts();
       return request(app)

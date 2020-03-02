@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
@@ -13,7 +13,9 @@ module.exports = (err, req, res, next) => {
 
   res.status(status);
 
-  console.log(err);
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(err);
+  }
 
   res.send({
     status,
