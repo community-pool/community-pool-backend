@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { runInContext } from 'vm';
-const Count = require('../models/Count');
+import Count from '../models/Count';
 
 module.exports = Router().get('/', (req, res) => {
   Count.findOneAndUpdate(

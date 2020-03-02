@@ -13,7 +13,9 @@ module.exports = (err, req, res, next) => {
 
   res.status(status);
 
-  console.log(err);
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(err);
+  }
 
   res.send({
     status,
