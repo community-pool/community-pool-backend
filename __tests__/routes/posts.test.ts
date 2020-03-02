@@ -23,13 +23,13 @@ describe('app routes', () => {
     it('Returns a new posts', () => {
       return request(app)
         .post('/api/v1/posts')
-        .send({ userName: 'jack', title: 'testTitle', content: 'testConent' })
+        .send({ userName: 'jack', title: 'jackTitle', content: 'jackContent' })
         .then(res => {
           expect(res.body).toEqual({
             _id: expect.any(String),
             userName: 'jack',
-            title: 'testTitle',
-            content: 'testConent'
+            title: 'jackTitle',
+            content: 'jackContent'
           });
         });
     });
@@ -61,7 +61,7 @@ describe('app routes', () => {
         });
     });
 
-    it('returns a specific post', async () => {
+    it('Returns a specific post', async () => {
       const posts = await createPosts();
       return request(app)
         .get(`/api/v1/posts/${posts[2]._id}`)
@@ -72,6 +72,46 @@ describe('app routes', () => {
             title: posts[2].title,
             content: posts[2].content
           });
+        });
+    });
+
+    it('Returns a deleted post', async () => {
+      const posts = await createPosts();
+      request(app)
+        .delete(`/api/v1/posts/${posts[0]._id}`)
+        .then(res => {
+          expect(res.body).toEqual({
+            _id: expect.any(String),
+            userName: 'jack',
+            title: 'jackTitle',
+            content: 'jackContent'
+          });
+        });
+
+      return request(app)
+        .get(`/api/v1/posts/${posts[0]._id}`)
+        .then(res => {
+          expect(res.body).toEqual({ status: 404, message: 'Not Found' });
+        });
+    });
+
+    it('Tries to delete a post that is already deleted', async () => {
+      const posts = await createPosts();
+      request(app)
+        .delete(`/api/v1/posts/${posts[0]._id}`)
+        .then(res => {
+          expect(res.body).toEqual({
+            _id: expect.any(String),
+            userName: 'jack',
+            title: 'jackTitle',
+            content: 'jackContent'
+          });
+        });
+
+      return request(app)
+        .delete(`/api/v1/posts/${posts[0]._id}`)
+        .then(res => {
+          expect(res.body).toEqual({ status: 404, message: 'Not Found' });
         });
     });
   });

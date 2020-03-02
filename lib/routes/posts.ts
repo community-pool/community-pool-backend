@@ -10,7 +10,14 @@ module.exports = Router()
   })
   .get('/:id', (req, res, next) => {
     Post.findById(req.params.id)
-      .then(post => res.send(post))
+      .then(post => {
+        if (!post) {
+          let err = new Error('Not Found');
+          err['status'] = 404;
+          throw err;
+        }
+        res.send(post);
+      })
       .catch(next);
   })
   .post('/', (req, res, next) => {
@@ -21,6 +28,13 @@ module.exports = Router()
   })
   .delete('/:id', (req, res, next) => {
     Post.findByIdAndDelete(req.params.id)
-      .then(post => res.send(post))
+      .then(post => {
+        if (!post) {
+          let err = new Error('Not Found');
+          err['status'] = 404;
+          throw err;
+        }
+        res.send(post);
+      })
       .catch(next);
   });
