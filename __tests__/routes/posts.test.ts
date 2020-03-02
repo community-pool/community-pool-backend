@@ -1,4 +1,5 @@
 require('dotenv').config();
+process.env.NODE_ENV = 'test';
 
 import * as request from 'supertest';
 import { app } from '../../lib/app';
