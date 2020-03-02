@@ -1,4 +1,4 @@
-import Post from '../../lib/models/Post';
+import Post, { IPost } from '../../lib/models/Post';
 
 export const createPosts = async () => {
   const post0 = {
@@ -17,5 +17,5 @@ export const createPosts = async () => {
     content: 'ethanContent'
   };
 
-  await Post.insertMany([post0, post1, post2]);
+  return await Post.insertMany([post0, post1, post2]);
 };
