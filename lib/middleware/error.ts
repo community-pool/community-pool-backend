@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import * as mongoose from 'mongoose';
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
