@@ -1,4 +1,4 @@
-import Post, { IPost } from '../../lib/models/Post';
+import Post from '../../lib/models/Post';
 
 export const createPosts = async () => {
   const post0 = {

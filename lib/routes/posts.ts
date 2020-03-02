@@ -1,6 +1,5 @@
 const { Router } = require('express');
 import Post from '../models/Post';
-import { toEditorSettings } from 'typescript';
 
 module.exports = Router()
   .get('/', (req, res, next) => {

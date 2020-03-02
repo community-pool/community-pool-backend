@@ -7,7 +7,7 @@ export interface IPost extends Document {
   content: string;
 }
 
-const postSchema = new mongoose.Schema(
+const postSchema = new Schema(
   {
     userName: {
       type: String,
