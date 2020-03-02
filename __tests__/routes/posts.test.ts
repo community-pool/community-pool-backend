@@ -77,7 +77,7 @@ describe('app routes', () => {
 
     it('Returns a deleted post', async () => {
       const posts = await createPosts();
-      request(app)
+      return request(app)
         .delete(`/api/v1/posts/${posts[0]._id}`)
         .then(res => {
           expect(res.body).toEqual({
@@ -86,18 +86,17 @@ describe('app routes', () => {
             title: 'jackTitle',
             content: 'jackContent'
           });
-        });
 
-      return request(app)
-        .get(`/api/v1/posts/${posts[0]._id}`)
+          return request(app).get(`/api/v1/posts/${posts[0]._id}`);
+        })
         .then(res => {
           expect(res.body).toEqual({ status: 404, message: 'Not Found' });
         });
     });
 
-    it('Tries to delete a post that is already deleted', async () => {
+    it('Fails to delete a post that is already deleted', async () => {
       const posts = await createPosts();
-      request(app)
+      return request(app)
         .delete(`/api/v1/posts/${posts[0]._id}`)
         .then(res => {
           expect(res.body).toEqual({
@@ -106,12 +105,50 @@ describe('app routes', () => {
             title: 'jackTitle',
             content: 'jackContent'
           });
-        });
 
+          return request(app).delete(`/api/v1/posts/${posts[0]._id}`);
+        })
+        .then(res => {
+          expect(res.body).toEqual({ status: 404, message: 'Not Found' });
+        });
+    });
+
+    it('Updates a post', async () => {
+      const posts = await createPosts();
+      return request(app)
+        .put(`/api/v1/posts/${posts[0]._id}`)
+        .send({ title: 'newTitle', content: 'newContent' })
+        .then(res => {
+          expect(res.body).toEqual({
+            _id: expect.any(String),
+            userName: 'jack',
+            title: 'newTitle',
+            content: 'newContent'
+          });
+        });
+    });
+
+    it('Fails to Update a post', async () => {
+      const posts = await createPosts();
       return request(app)
         .delete(`/api/v1/posts/${posts[0]._id}`)
         .then(res => {
-          expect(res.body).toEqual({ status: 404, message: 'Not Found' });
+          expect(res.body).toEqual({
+            _id: expect.any(String),
+            userName: 'jack',
+            title: 'jackTitle',
+            content: 'jackContent'
+          });
+
+          return request(app)
+            .put(`/api/v1/posts/${posts[0]._id}`)
+            .send({ title: 'newTitle', content: 'newContent' });
+        })
+        .then(res => {
+          expect(res.body).toEqual({
+            message: 'Not Found',
+            status: 404
+          });
         });
     });
   });

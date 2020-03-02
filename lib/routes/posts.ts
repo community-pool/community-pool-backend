@@ -37,4 +37,21 @@ module.exports = Router()
         res.send(post);
       })
       .catch(next);
+  })
+  .put('/:id', (req, res, next) => {
+    const { title, content } = req.body;
+    Post.findByIdAndUpdate(
+      { _id: req.params.id },
+      { title, content },
+      { new: true }
+    )
+      .then(post => {
+        if (!post) {
+          let err = new Error('Not Found');
+          err['status'] = 404;
+          throw err;
+        }
+        res.send(post);
+      })
+      .catch(next);
   });
