@@ -1,5 +1,4 @@
 require('dotenv').config();
-process.env.NODE_ENV = 'test';
 
 import * as request from 'supertest';
 import { app } from '../../lib/app';
@@ -10,7 +9,7 @@ import { setupTest } from '../helpers/setup-test';
 
 describe('app routes', () => {
   beforeAll(() => {
-    setupTest();
+    if (process.env.NODE_ENV !== 'ci') setupTest();
     connect();
   });
 
