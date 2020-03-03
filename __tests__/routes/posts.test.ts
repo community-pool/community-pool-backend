@@ -1,14 +1,15 @@
 require('dotenv').config();
-process.env.NODE_ENV = 'test';
 
 import * as request from 'supertest';
 import { app } from '../../lib/app';
 import { connect } from '../../lib/utils/connect';
 import * as mongoose from 'mongoose';
 import { createPosts } from '../helpers/create-posts';
+import { setupTest } from '../helpers/setup-test';
 
 describe('app routes', () => {
   beforeAll(() => {
+    setupTest();
     connect();
   });
 
