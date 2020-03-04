@@ -1,7 +1,14 @@
 import * as mongoose from 'mongoose';
+import { Request, Response, NextFunction } from 'express';
+import { ResponseError } from '../interfaces/response-error';
 
 // eslint-disable-next-line no-unused-vars
-module.exports = (err, req, res, next) => {
+module.exports = (
+  err: ResponseError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   let status = err.status || 500;
 
   if (

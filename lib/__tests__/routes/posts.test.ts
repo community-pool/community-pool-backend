@@ -1,8 +1,8 @@
 require('dotenv').config();
 
-import * as request from 'supertest';
-import { app } from '../../lib/app';
-import { connect } from '../../lib/utils/connect';
+import request = require('supertest');
+import { app } from '../../app';
+import { connect } from '../../utils/connect';
 import * as mongoose from 'mongoose';
 import { createPosts } from '../helpers/create-posts';
 import { setupTest } from '../helpers/setup-test';
