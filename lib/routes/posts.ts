@@ -20,7 +20,7 @@ module.exports = Router()
       })
       .catch(next);
   })
-  .post('/', (req, res, next) => {
+  .post('/', (req: Request, res: Response, next: NextFunction) => {
     const { userName, title, content } = req.body;
     Post.create({ userName, title, content })
       .then(post => res.send(post))

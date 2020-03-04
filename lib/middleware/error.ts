@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import mongoose = require('mongoose');
 import { Request, Response, NextFunction } from 'express';
 import { ResponseError } from '../interfaces/response-error';
 
@@ -17,7 +17,6 @@ module.exports = (
   ) {
     status = 400;
   }
-
   res.status(status);
 
   if (process.env.NODE_ENV !== 'test') {
