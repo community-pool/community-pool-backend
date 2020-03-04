@@ -23,7 +23,7 @@ jobs:
           registry-usrl: https://registry.npmjs.org
 
       - name: Install
-        run: npm Install
+        run: npm install
 
       - name: build
         run: npm run build
