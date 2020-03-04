@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import mongoose = require('mongoose');
 import { Schema, Document } from 'mongoose';
 
 export interface ICount extends Document {

@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-import * as request from 'supertest';
-import { app } from '../../lib/app';
-import { connect } from '../../lib/utils/connect';
-import * as mongoose from 'mongoose';
+import request = require('supertest');
+import { app } from '../../app';
+import { connect } from '../../utils/connect';
+import mongoose = require('mongoose');
 import { createPosts } from '../helpers/create-posts';
 import { setupTest } from '../helpers/setup-test';
 
@@ -14,18 +14,18 @@ describe('app routes', () => {
   });
 
   beforeEach(() => {
-    return mongoose.connection.dropDatabase();
+    return mongoose.connection!.dropDatabase();
   });
 
   afterAll(() => {
-    return mongoose.connection.close();
+    return mongoose.connection!.close();
   });
 
   it('Returns a new posts', () => {
     return request(app)
       .post('/api/v1/posts')
       .send({ userName: 'jack', title: 'jackTitle', content: 'jackContent' })
-      .then(res => {
+      .then((res: any) => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           userName: 'jack',
