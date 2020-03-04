@@ -14,4 +14,4 @@ COPY . .
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
-CMD ["nodemon", "lib/server.ts"]
+CMD ["node", "server.ts"]
