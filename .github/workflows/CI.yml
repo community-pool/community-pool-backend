@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   test:
-    name: TRest on node ${{ matrix.node }} and ${{ matrix.os }}
+    name: Test on node ${{ matrix.node }} and ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
 
