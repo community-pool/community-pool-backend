@@ -13,6 +13,12 @@ jobs:
         node: [12]
         os: [ubuntu-latest]
 
+    services:
+      mongodb:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
+
     steps:
       - uses: actions/checkout@v1
 
@@ -31,5 +37,5 @@ jobs:
       - name: test
         run: npm test
         env:
-          MONGODB_URI: mongodb://localhost:27017/travis
+          MONGODB_URI: mongodb://localhost:27017/github
           NODE_ENV: ci
