@@ -1,7 +1,7 @@
-import * as mongoose from 'mongoose';
+import mongoose = require('mongoose');
 import { parse } from 'url';
 
-const connect = (url = process.env.MONGODB_URI) => {
+const connect = (url = process.env.MONGODB_URI!) => {
   mongoose.connect(url, {
     useCreateIndex: true,
     useNewUrlParser: true,
