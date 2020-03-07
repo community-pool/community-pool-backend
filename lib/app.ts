@@ -5,7 +5,7 @@ const path = require('path');
 const expressSession = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
-
+const authRouter = require('./routes/auth')
 /**
  * Session Configuration
  */
@@ -71,6 +71,8 @@ passport.deserializeUser((user, done) => {
 //************** */
 
 app.use(express.json());
+
+app.use('/', authRouter);
 
 app.use('/api/v1/hello-world', require('./routes/hello-world'));
 
