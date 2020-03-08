@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-
+const cors = require('cors');
 const expressSession = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
@@ -67,8 +67,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(expressSession(path.join(__dirname, 'public')));
-
 app.use(expressSession(session));
 
 passport.use(strategy);
@@ -89,9 +87,6 @@ app.use(express.json());
 
 app.use('/', authRouter);
 
-app.use('/api/v1/hello-world', require('./routes/hello-world'));
-// import * as cors from 'cors';
-const cors = require('cors');
 app.use(
   cors({
     origin: true,

@@ -9,7 +9,7 @@ import { setupTest } from '../helpers/setup-test';
 
 describe('app routes', () => {
   beforeAll(() => {
-    if (process.env.NODE_ENV !== 'ci') setupTest();
+    // if (process.env.NODE_ENV !== 'ci') setupTest();
     connect();
   });
 
