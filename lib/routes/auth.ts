@@ -6,7 +6,7 @@ import { Router } from 'express';
 import passport from 'passport';
 import util from 'util';
 import querystring from 'querystring';
-import { ResponseError } from '../interfaces/response-error';
+// import { ResponseError } from '../interfaces/response-error';
 
 require('dotenv').config();
 
@@ -31,15 +31,12 @@ module.exports = Router()
         if (err) {
           return next(err);
         }
+        let returnTo;
         if (req.session && req.session.returnTo) {
-          const returnTo = req.session.returnTo;
+          returnTo = req.session.returnTo;
           delete req.session.returnTo;
-          res.redirect(returnTo || '/');
-        } else {
-          let err: ResponseError = new Error('No session');
-          err.status = 401;
-          throw err;
         }
+        res.redirect(returnTo || 'http://localhost:3000/');
       });
     })(req, res, next);
   })
